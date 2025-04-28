@@ -1,4 +1,5 @@
 #!/bin/zsh
+set -e
 # Takes as an argument a branch name.
 # At some point that branch diverged from master.
 # The files that have changed are displayed in a fzf search window.

@@ -1,4 +1,4 @@
-# NMCA Bash Utils
+# Bash Utils
 
 A collection of zsh utilities for Git workflows, notebook creation, and development tasks.
 
@@ -97,3 +97,13 @@ To modify default dependencies, edit the template at `templates/notebook.py`.
 | `NOTEBOOK_DIR` | Directory where new notebooks are created | `$HOME/notebooks` |
 | `NOTES_DIR` | Directory where new notes are created | `$HOME/notes` |
 | `NOTEBOOK_TEMPLATE` | Path to the notebook template file | `<script_dir>/templates/notebook.py` |
+
+## Script Behavior
+
+All scripts in this repository:
+
+1. Fail immediately on any error (`set -e`)
+2. Return meaningful exit codes
+3. Print error messages to stderr
+
+This makes them safe to use in automated workflows and pipelines.

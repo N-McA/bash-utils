@@ -1,4 +1,5 @@
 #!/bin/zsh
+set -e
 # Shows filenames that differ from master, including both staged and unstaged changes
 
 # Get all modified files:

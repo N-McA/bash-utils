@@ -1,4 +1,5 @@
 #!/bin/zsh
+set -e
 # git gb <branch-name> - fetch a branch from remote and check out $USER/that-branch as a new branch
 
 # Check if a branch name was provided

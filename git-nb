@@ -1,4 +1,5 @@
 #!/bin/zsh
+set -e
 # git nb <branch-name> - fetch master from remote and check out a new branch with the provided name
 
 # Check if a branch name was provided

@@ -1,4 +1,5 @@
 #!/bin/zsh
+set -e
 # takes one optional argument: a name.
 # copies the template to "year-month-day{-name?}.py" in the NOTEBOOK_DIR.
 

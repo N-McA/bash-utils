@@ -1,4 +1,5 @@
 #!/bin/zsh
+set -e
 # open the PR for the current commit on github
 # in the browser. Show the diff page if there is no pr.
 

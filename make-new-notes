@@ -1,4 +1,5 @@
 #!/bin/zsh
+set -e
 # Takes one optional argument: a name
 # creates a new file in NOTES_DIR with format 'year-month-day-name.md' if name is provided
 # otherwise 'year-month-day.md', e.g. 01-05-01.md

@@ -1,4 +1,5 @@
 #!/bin/zsh
+set -e
 # git mm - fetch master from remote and merge it into the current branch
 
 # Get the current branch name

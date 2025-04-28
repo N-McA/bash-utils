@@ -1,4 +1,5 @@
 #!/bin/zsh
+set -e
 # Shows diff between current branch and master, including unstaged changes
 
 # First show diff between master and HEAD
