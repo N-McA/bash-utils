@@ -11,22 +11,20 @@ A collection of zsh utilities for Git workflows, notebook creation, and developm
 
 2. Add the directory to your PATH and set default directories in your `~/.zshrc` file:
    ```bash
-   export PATH="$PATH:/path/to/nmca-bash-utils"
-   
+   UTIL_PATH="/path/to/nmca-bash-utils"
+   export PATH="$PATH:$UTIL_PATH"
+
    # Default directories for notebooks and notes
    export NOTEBOOK_DIR="$HOME/notebooks"
    export NOTES_DIR="$HOME/notes"
-   
+
    # Optional: customize notebook template location
    export NOTEBOOK_TEMPLATE="/path/to/nmca-bash-utils/templates/notebook.py"
+
+   source "$UTIL_PATH/alias.zsh"
    ```
 
-3. Source the aliases file in your `~/.zshrc`:
-   ```bash
-   source /path/to/nmca-bash-utils/alias.zsh
-   ```
-
-4. Reload your shell:
+3. Reload your shell:
    ```bash
    source ~/.zshrc
    ```
