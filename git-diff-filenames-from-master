@@ -1,5 +1,16 @@
 #!/bin/zsh
-# Same as git-diff-from-master but just shows filenames.
+# Shows filenames that differ from master, including both staged and unstaged changes
+
+# Get all modified files:
+# 1. Files that differ between master and HEAD (committed changes)
+# 2. Files with unstaged changes (modified but not committed)
 
 # Get the diff filenames between master and HEAD
-git diff --name-only master...HEAD
+committed_changes=$(git --no-pager diff --name-only master...HEAD)
+
+# Get unstaged changes
+unstaged_changes=$(git --no-pager diff --name-only)
+
+# Combine and remove duplicates
+echo "$committed_changes
+$unstaged_changes" | sort | uniq

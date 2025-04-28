@@ -1,5 +1,12 @@
 #!/bin/zsh
-# Shows diff between current branch and master
+# Shows diff between current branch and master, including unstaged changes
 
-# Get the diff between master and HEAD
-git diff master...HEAD
+# First show diff between master and HEAD
+echo "=== Committed changes (master...HEAD) ==="
+git --no-pager diff master...HEAD
+
+# Then show unstaged changes
+if [ -n "$(git status --porcelain)" ]; then
+  echo -e "\n=== Unstaged changes ==="
+  git --no-pager diff
+fi
