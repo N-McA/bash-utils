@@ -1,0 +1,5 @@
+
+# Takes two arguments: a path to a folder of notebooks, and a name
+# creates a new file there with format 'year-month-day-name.md' if name is provided
+# otherwise 'year-month-day.md', e.g. 01-05-01.md
+# the content of the file is e.g. '# {name?} Jan 5th\n'

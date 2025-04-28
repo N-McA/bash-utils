@@ -1,0 +1,7 @@
+
+# grep over the diffs of local branches in most-recent order
+# up to a maximum of 50. Prints
+# branch name
+# file name
+# diff
+# for matches with colors in a good format.

@@ -1,0 +1,2 @@
+# takes three arguments: a template path and a notebook directory path, a name.
+# copies the template to "year-month-day{-name?}.py" in the notebook directory.

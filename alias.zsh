@@ -1,0 +1,8 @@
+alias gbh='git-branch-history'
+alias gbr='git-branch-restore'
+alias gd='git-diff-from-master'
+alias gdf='git-diff-filenames-from-master'
+alias nb='make-new-notebook'
+alias nt='make-new-notes'
+alias pr='open-pr-on-github'
+alias sb='search-local-branches'

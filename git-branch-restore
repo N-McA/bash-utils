@@ -1,0 +1,7 @@
+# Takes as an argument a branch name.
+# At some point that branch diverged from master.
+# The files that have changed are displayed in a fzf search window.
+# when a file is selected, the diff is shown.
+# Pressing tab selects a file.
+# when the multi-select is finished, those files are 'restore'ed into
+# the current state.
