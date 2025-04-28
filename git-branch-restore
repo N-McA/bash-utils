@@ -1,3 +1,4 @@
+#!/bin/zsh
 # Takes as an argument a branch name.
 # At some point that branch diverged from master.
 # The files that have changed are displayed in a fzf search window.
@@ -5,3 +6,36 @@
 # Pressing tab selects a file.
 # when the multi-select is finished, those files are 'restore'ed into
 # the current state.
+
+# Check if branch name was provided
+if [ $# -eq 0 ]; then
+    echo "Error: Branch name is required"
+    echo "Usage: git-branch-restore <branch-name>"
+    exit 1
+fi
+
+branch_name=$1
+
+# Get the changed files between the branch and master
+changed_files=$(git diff --name-only master...$branch_name)
+
+# Check if fzf is installed
+if ! command -v fzf &> /dev/null; then
+    echo "Error: fzf is not installed. Please install it first."
+    exit 1
+fi
+
+# Use fzf to select files to restore
+selected_files=$(echo "$changed_files" | fzf --multi --preview "git diff master...$branch_name -- {}")
+
+# Check if any files were selected
+if [ -z "$selected_files" ]; then
+    echo "No files selected. Nothing to restore."
+    exit 0
+fi
+
+# Restore the selected files from the branch
+echo "$selected_files" | while read file; do
+    git restore --source="$branch_name" "$file"
+    echo "Restored: $file"
+done

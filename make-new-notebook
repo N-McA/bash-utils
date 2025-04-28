@@ -1,2 +1,34 @@
-# takes three arguments: a template path and a notebook directory path, a name.
-# copies the template to "year-month-day{-name?}.py" in the notebook directory.
+#!/bin/zsh
+# takes one optional argument: a name.
+# copies the template to "year-month-day{-name?}.py" in the NOTEBOOK_DIR.
+
+# Load environment variables or use defaults
+template_path=${NOTEBOOK_TEMPLATE:-"${0:A:h}/templates/notebook.py"}
+notebook_dir=${NOTEBOOK_DIR:-"$HOME/notebooks"}
+name=$1
+
+# Format current date as year-month-day
+today=$(date +"%Y-%m-%d")
+
+# Create filename with optional name suffix
+if [ -n "$name" ]; then
+    filename="$today-$name.py"
+    title="$name"
+else
+    filename="$today.py"
+    title="Notebook $today"
+fi
+
+# Ensure notebook directory exists
+mkdir -p "$notebook_dir"
+
+# Create full path for new notebook
+new_notebook_path="$notebook_dir/$filename"
+
+# Copy template and replace placeholders
+sed -e "s/{date}/$today/g" -e "s/{title}/$title/g" "$template_path" > "$new_notebook_path"
+
+# Make the new notebook executable
+chmod +x "$new_notebook_path"
+
+echo "Created new notebook: $new_notebook_path"

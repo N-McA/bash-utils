@@ -1,0 +1,20 @@
+#!/bin/zsh
+# git gb <branch-name> - fetch a branch from remote and check out $USER/that-branch as a new branch
+
+# Check if a branch name was provided
+if [ $# -eq 0 ]; then
+    echo "Error: Branch name is required"
+    echo "Usage: git gb <branch-name>"
+    exit 1
+fi
+
+remote_branch=$1
+user_branch="$USER/$remote_branch"
+
+# Fetch the specific branch from remote
+git fetch origin "$remote_branch":"$remote_branch"
+
+# Create a new branch with $USER prefix based on the fetched branch
+git checkout -b "$user_branch" "$remote_branch"
+
+echo "Created new branch '$user_branch' based on remote branch '$remote_branch'"

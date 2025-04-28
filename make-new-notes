@@ -1,5 +1,34 @@
-
-# Takes two arguments: a path to a folder of notebooks, and a name
-# creates a new file there with format 'year-month-day-name.md' if name is provided
+#!/bin/zsh
+# Takes one optional argument: a name
+# creates a new file in NOTES_DIR with format 'year-month-day-name.md' if name is provided
 # otherwise 'year-month-day.md', e.g. 01-05-01.md
 # the content of the file is e.g. '# {name?} Jan 5th\n'
+
+# Load environment variables or use defaults
+notes_dir=${NOTES_DIR:-"$HOME/notes"}
+name=$1
+
+# Ensure notes directory exists
+mkdir -p "$notes_dir"
+
+# Format current date in different formats
+date_ymd=$(date +"%Y-%m-%d")
+date_readable=$(date +"%b %-d%S")  # e.g. Jan 5th
+
+# Create filename with optional name suffix
+if [ -n "$name" ]; then
+    filename="$date_ymd-$name.md"
+    header="# $name - $date_readable"
+else
+    filename="$date_ymd.md"
+    header="# $date_readable"
+fi
+
+# Create full path for new notes file
+new_notes_path="$notes_dir/$filename"
+
+# Create the notes file with the header
+echo "$header" > "$new_notes_path"
+echo "" >> "$new_notes_path"  # Add empty line after header
+
+echo "Created new notes file: $new_notes_path"

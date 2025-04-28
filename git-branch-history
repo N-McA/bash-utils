@@ -1,2 +1,9 @@
+#!/bin/zsh
 # lists the n=10 by default most recent branches
 # that have been checked out locally
+
+# Default number of branches to show
+n=${1:-10}
+
+# Get the reflog entries for HEAD
+git reflog show HEAD | grep 'checkout: moving from' | awk '{print $8}' | sort | uniq -c | sort -nr | head -n "$n" | awk '{print $2}'

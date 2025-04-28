@@ -1,7 +1,34 @@
-
+#!/bin/zsh
 # grep over the diffs of local branches in most-recent order
 # up to a maximum of 50. Prints
 # branch name
 # file name
 # diff
 # for matches with colors in a good format.
+
+# Check if a search term was provided
+if [ $# -eq 0 ]; then
+    echo "Error: Search term is required"
+    echo "Usage: search-local-branches <search-term>"
+    exit 1
+fi
+
+search_term=$1
+max_branches=50
+
+# Get local branches sorted by most recent commit
+branches=$(git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | head -n "$max_branches")
+
+# Search through each branch's diff
+echo "$branches" | while read branch; do
+    # Get diff between master and branch
+    git diff master...$branch | grep --color=always -n "$search_term" | while read match; do
+        # Extract file name from the diff output
+        current_file=$(echo "$match" | sed -E 's/^([^:]+):.*/\1/')
+        
+        # Print branch, file, and the match with proper formatting
+        echo -e "\033[1;36m$branch\033[0m - \033[1;33m$current_file\033[0m:"
+        echo "$match"
+        echo ""
+    done
+done

@@ -1,0 +1,5 @@
+#!/bin/zsh
+# Shows diff between current branch and master
+
+# Get the diff between master and HEAD
+git diff master...HEAD

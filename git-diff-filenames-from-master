@@ -1,1 +1,5 @@
+#!/bin/zsh
 # Same as git-diff-from-master but just shows filenames.
+
+# Get the diff filenames between master and HEAD
+git diff --name-only master...HEAD

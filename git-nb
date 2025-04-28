@@ -1,0 +1,19 @@
+#!/bin/zsh
+# git nb <branch-name> - fetch master from remote and check out a new branch with the provided name
+
+# Check if a branch name was provided
+if [ $# -eq 0 ]; then
+    echo "Error: Branch name is required"
+    echo "Usage: git nb <branch-name>"
+    exit 1
+fi
+
+branch_name=$1
+
+# Fetch master from remote
+git fetch origin master:master
+
+# Create a new branch from master
+git checkout -b "$branch_name" master
+
+echo "Created new branch '$branch_name' from up-to-date master"

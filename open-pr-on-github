@@ -1,3 +1,30 @@
-
+#!/bin/zsh
 # open the PR for the current commit on github
 # in the browser. Show the diff page if there is no pr.
+
+# Get current branch
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Get the remote URL
+remote_url=$(git remote get-url origin)
+
+# Remove .git suffix if present and convert SSH URL to HTTPS if needed
+github_url=$(echo $remote_url | sed -e 's/\.git$//' -e 's/git@github.com:/https:\/\/github.com\//')
+
+# Try to find an existing PR for the current branch
+pr_url=""
+if command -v gh &> /dev/null; then
+    # If GitHub CLI is installed, use it to find the PR
+    pr_url=$(gh pr view --json url -q .url 2>/dev/null)
+fi
+
+# If PR was found, open it
+if [ -n "$pr_url" ]; then
+    echo "Opening existing PR: $pr_url"
+    open "$pr_url"
+else
+    # If no PR found, open the compare page
+    compare_url="$github_url/compare/master...$current_branch"
+    echo "No PR found. Opening compare page: $compare_url"
+    open "$compare_url"
+fi

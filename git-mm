@@ -1,0 +1,13 @@
+#!/bin/zsh
+# git mm - fetch master from remote and merge it into the current branch
+
+# Get the current branch name
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Fetch master from remote
+git fetch origin master:master
+
+# Merge master into the current branch
+git merge master
+
+echo "Merged master into $current_branch"
